@@ -50,7 +50,7 @@ func DebugPacket(p gopacket.Packet, mark string) {
 		client := &http.Client{}
 		resp, err := client.Do(req)
 		if err != nil {
-			panic(err)
+			log.Error(err)
 		}
 		defer resp.Body.Close()
 
