@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
-	"gutil/log"
+	"github.com/iesreza/gutil/log"
 	"net/http"
 )
 
