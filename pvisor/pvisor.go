@@ -43,6 +43,7 @@ func DebugPacket(p gopacket.Packet, mark string) {
 
 		b, err := json.Marshal(wrapper)
 		if err == nil {
+
 			log.Warning("Send packet to %s", DebugURL)
 			req, err := http.NewRequest("POST", DebugURL, bytes.NewBuffer(b))
 			req.Header.Set("Content-Type", "application/json")
@@ -51,9 +52,9 @@ func DebugPacket(p gopacket.Packet, mark string) {
 			resp, err := client.Do(req)
 			if err != nil {
 				log.Error(err)
+			} else {
+				defer resp.Body.Close()
 			}
-			defer resp.Body.Close()
-
 		}
 	}()
 }
