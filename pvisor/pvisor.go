@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
+	"gutil/log"
 	"net/http"
 )
 
@@ -42,7 +43,7 @@ func DebugPacket(p gopacket.Packet, mark string) {
 
 	b, err := json.Marshal(wrapper)
 	if err == nil {
-
+		log.Warning("Send packet to %s", DebugURL)
 		req, err := http.NewRequest("POST", DebugURL, bytes.NewBuffer(b))
 		req.Header.Set("Content-Type", "application/json")
 
