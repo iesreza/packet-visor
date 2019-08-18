@@ -56,6 +56,7 @@ func read(w http.ResponseWriter, request *http.Request) {
 		b, err := json.Marshal(resp)
 		if err == nil {
 			w.Write(b)
+			Queue = []pvisor.Packet{}
 		}
 
 	} else {

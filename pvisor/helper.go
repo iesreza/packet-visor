@@ -33,7 +33,7 @@ func ParseSrcIP(b []byte) HexPair {
 		Length: 4,
 	}
 	pair.Bytes = s(b[pair.Start : pair.Start+pair.Length])
-	pair.Data = net.IP(pair.Bytes).String()
+	pair.Data = net.IP(b[pair.Start : pair.Start+pair.Length]).String()
 	return pair
 }
 func ParseDstIP(b []byte) HexPair {
@@ -42,7 +42,7 @@ func ParseDstIP(b []byte) HexPair {
 		Length: 4,
 	}
 	pair.Bytes = s(b[pair.Start : pair.Start+pair.Length])
-	pair.Data = net.IP(pair.Bytes).String()
+	pair.Data = net.IP(b[pair.Start : pair.Start+pair.Length]).String()
 	return pair
 }
 
