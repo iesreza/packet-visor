@@ -7,6 +7,7 @@ import (
 	"github.com/google/gopacket/layers"
 	"github.com/iesreza/gutil/log"
 	"net/http"
+	"time"
 )
 
 var seq int64
@@ -26,16 +27,16 @@ func DebugPacket(p gopacket.Packet, mark string) {
 			wrapper.SrcPort = ParseSrcPort(b)
 			wrapper.DstPort = ParseDstPort(b)
 		}
-
-		wrapper.Time = p.Metadata().Timestamp.Unix()
+		wrapper.Payload = s(p.Data())
+		wrapper.Time = time.Now().Unix()
 		seq++
 		wrapper.Sequence = seq
 		if tcpLayer != nil {
 			wrapper.Type = "TCP"
-			wrapper.LayerData = tcpLayer.LayerPayload()
+			wrapper.LayerData = s(tcpLayer.LayerPayload())
 		} else if udpLayer != nil {
 			wrapper.Type = "UDP"
-			wrapper.LayerData = udpLayer.LayerPayload()
+			wrapper.LayerData = s(udpLayer.LayerPayload())
 		} else {
 			wrapper.Type = "IP"
 		}
