@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/iesreza/packet-visor/pvisor"
 	"io/ioutil"
@@ -35,9 +34,11 @@ func main() {
 
 func write(w http.ResponseWriter, request *http.Request) {
 
-	body, err := ioutil.ReadAll(request.Body)
+	body, _ := ioutil.ReadAll(request.Body)
+	var packet pvisor.Packet
+	json.Unmarshal(body, &packet)
 
-	fmt.Println(body, err)
+	Queue = append(Queue, packet)
 
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")

@@ -2,7 +2,7 @@
 
 setInterval(function () {
 
-    $.get("http://127.0.0.1/read", function(data, status){
+    $.get("http://127.0.0.1/read/", function(data, status){
         console.warn(data)
     });
 
